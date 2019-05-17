@@ -1,28 +1,30 @@
-package com.miracle.effort.exception;
+package com.miracle.ordering.exception;
 
 import org.springframework.http.HttpStatus;
 
 import com.miracle.exception.GatewayServiceException;
 
-public class EffortException extends GatewayServiceException {
+public class OrderingException extends GatewayServiceException {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4633876870673211026L;
-	
+	private static final long serialVersionUID = -816387637206481014L;
+	public OrderingException() {
+	}
+
 	/**
 	 * @param message
 	 */
-	public EffortException(String message) {
+	public OrderingException(String message) {
 		super(message);
 	}
 	
-	public EffortException(String message,String errorCode) {
+	public OrderingException(String message,String errorCode) {
 		super(message);
 		setErrorCode(errorCode);
 	}
-	public EffortException(String message,String errorCode,HttpStatus statusCode) {
+	public OrderingException(String message,String errorCode,HttpStatus statusCode) {
 		super(message);
 		setErrorCode(errorCode);
 		setStatusCode(statusCode);
@@ -31,7 +33,7 @@ public class EffortException extends GatewayServiceException {
 	/**
 	 * @param cause
 	 */
-	public EffortException(Throwable cause) {
+	public OrderingException(Throwable cause) {
 		super(cause);
 	}
 
@@ -39,18 +41,21 @@ public class EffortException extends GatewayServiceException {
 	 * @param message
 	 * @param cause
 	 */
-	public EffortException(String message, Throwable cause) {
+	public OrderingException(String message, Throwable cause) {
 		super(message, cause);
 	}
 	
 	/**
+	 * 
 	 * @param message
 	 * @param cause
+	 * @param errorCode
 	 */
-	public EffortException(String message, Throwable cause,String errorCode) {
+	public OrderingException(String message, Throwable cause,String errorCode) {
 		super(message, cause);
 		setErrorCode(errorCode);
 	}
+	
 	/**
 	 * 
 	 * @param message
@@ -58,19 +63,19 @@ public class EffortException extends GatewayServiceException {
 	 * @param errorCode
 	 * @param statusCode
 	 */
-	public EffortException(String message, Throwable cause,String errorCode,HttpStatus statusCode) {
+	public OrderingException(String message, Throwable cause,String errorCode,HttpStatus statusCode) {
 		super(message, cause);
 		setErrorCode(errorCode);
 		setStatusCode(statusCode);
 	}
+
 	/**
 	 * @param message
 	 * @param cause
 	 * @param enableSuppression
 	 * @param writableStackTrace
 	 */
-	public EffortException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+	public OrderingException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
-
 }
