@@ -2,6 +2,8 @@ package com.miracle.effort.application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -11,12 +13,18 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
+@ComponentScan({ "com.miracle.database.connection", "com.miracle.controller", "com.miracle.config",
+		"com.miracle.utility", "com.miracle.effort.*" })
 @EnableSwagger2
-@ComponentScan(basePackages = "com.miracle")
-public class ReleasePlanApplication {
+public class APIEffortService extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ReleasePlanApplication.class, args);
+		SpringApplication.run(APIEffortService.class, args);
+	}
+
+	@Override
+	public SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(APIEffortService.class);
 	}
 
 	@Bean

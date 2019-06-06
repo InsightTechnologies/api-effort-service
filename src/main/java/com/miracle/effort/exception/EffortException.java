@@ -2,9 +2,9 @@ package com.miracle.effort.exception;
 
 import org.springframework.http.HttpStatus;
 
-import com.miracle.exception.GatewayServiceException;
+import com.miracle.exception.APIFrameworkException;
 
-public class EffortException extends GatewayServiceException {
+public class EffortException extends APIFrameworkException {
 
 	/**
 	 * 

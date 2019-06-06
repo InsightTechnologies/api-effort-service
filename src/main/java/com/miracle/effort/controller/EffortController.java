@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.miracle.api.service.bean.StoryMetadataBean;
 import com.miracle.common.api.bean.Story;
 import com.miracle.common.api.bean.StoryID;
 import com.miracle.common.controller.APIMicroService;
-import com.miracle.effort.bean.StoryMetadataBean;
 import com.miracle.effort.constants.EffortConstants;
 import com.miracle.effort.exception.EffortErrorCode;
 import com.miracle.effort.exception.EffortException;
-import com.miracle.exception.GatewayServiceException;
+import com.miracle.exception.APIFrameworkException;
 
 @RequestMapping(value = "/masterBot/project/stories")
 @RestController
@@ -35,7 +35,7 @@ public class EffortController extends APIMicroService {
 		try {
 			iceScrumURLPrefix = getIceScrumURLPrefix();
 			String projectName = storyMetadataBean.getProjectName();
-			List<String> states = storyMetadataBean.getStoryStates();
+			List<Integer> states = storyMetadataBean.getStoryStates();
 			List<StoryID> stories_ids = storyMetadataBean.getStories_ids();
 			if (stories_ids != null && stories_ids.size() > 0) {
 				for (StoryID storyID : stories_ids) {
@@ -50,8 +50,8 @@ public class EffortController extends APIMicroService {
 					logger.info("Story Details :: " + storyDetails);
 					Story story = new ObjectMapper().readValue(storyDetails, Story.class);
 					if (states != null && states.size() > 0) {
-						for (String state : states) {
-							if (Integer.parseInt(state) == story.getState()) {
+						for (Integer state : states) {
+							if (state == story.getState()) {
 								logger.info("storyID :: " + storyID.getId() + "\t uid:: " + story.getUid()
 										+ "\t Name :: " + story.getName() + "\t State ::" + story.getState()
 										+ "\t Effort :: " + story.getEffort());
@@ -74,7 +74,7 @@ public class EffortController extends APIMicroService {
 
 		} catch (EffortException effortException) {
 			throw effortException;
-		} catch (GatewayServiceException gatewayServiceException) {
+		} catch (APIFrameworkException gatewayServiceException) {
 			throw gatewayServiceException;
 		} catch (Exception exception) {
 			logger.error("Unable to estimate effort from stories , Exception Description :: " + exception.getMessage(),
